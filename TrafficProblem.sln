@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSystem", "TrafficSystem\TrafficSystem.csproj", "{6432D0C3-5DD6-45BB-9C24-C835C3CB3BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSystemContract", "TrafficSystemContract\TrafficSystemContract.csproj", "{3E96018C-FD37-487D-AC73-F785FEC6C44E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{49939151-0CE1-4302-87C1-708BC3A88708}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3EC416FE-4468-433A-9257-04A67ED528E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6432D0C3-5DD6-45BB-9C24-C835C3CB3BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6432D0C3-5DD6-45BB-9C24-C835C3CB3BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6432D0C3-5DD6-45BB-9C24-C835C3CB3BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6432D0C3-5DD6-45BB-9C24-C835C3CB3BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E96018C-FD37-487D-AC73-F785FEC6C44E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E96018C-FD37-487D-AC73-F785FEC6C44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E96018C-FD37-487D-AC73-F785FEC6C44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E96018C-FD37-487D-AC73-F785FEC6C44E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49939151-0CE1-4302-87C1-708BC3A88708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49939151-0CE1-4302-87C1-708BC3A88708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49939151-0CE1-4302-87C1-708BC3A88708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49939151-0CE1-4302-87C1-708BC3A88708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EC416FE-4468-433A-9257-04A67ED528E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC416FE-4468-433A-9257-04A67ED528E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC416FE-4468-433A-9257-04A67ED528E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC416FE-4468-433A-9257-04A67ED528E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
