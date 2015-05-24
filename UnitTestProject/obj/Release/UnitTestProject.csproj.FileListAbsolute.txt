@@ -1,0 +1,12 @@
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\UnitTestProject.dll
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\UnitTestProject.pdb
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\Common.dll
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\PowerCollections.dll
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\TrafficSystem.dll
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\TrafficSystemContract.dll
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\Common.pdb
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\TrafficSystemContract.pdb
+E:\NewDev\TrafficProblem\UnitTestProject\bin\Release\TrafficSystem.pdb
+E:\NewDev\TrafficProblem\UnitTestProject\obj\Release\UnitTestProject.csprojResolveAssemblyReference.cache
+E:\NewDev\TrafficProblem\UnitTestProject\obj\Release\UnitTestProject.dll
+E:\NewDev\TrafficProblem\UnitTestProject\obj\Release\UnitTestProject.pdb

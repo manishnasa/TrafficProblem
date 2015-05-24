@@ -1,0 +1,8 @@
+E:\NewDev\TrafficProblem\TrafficSystemContract\bin\Release\TrafficSystemContract.dll
+E:\NewDev\TrafficProblem\TrafficSystemContract\bin\Release\TrafficSystemContract.pdb
+E:\NewDev\TrafficProblem\TrafficSystemContract\bin\Release\Common.dll
+E:\NewDev\TrafficProblem\TrafficSystemContract\bin\Release\PowerCollections.dll
+E:\NewDev\TrafficProblem\TrafficSystemContract\bin\Release\Common.pdb
+E:\NewDev\TrafficProblem\TrafficSystemContract\obj\Release\TrafficSystemContract.csprojResolveAssemblyReference.cache
+E:\NewDev\TrafficProblem\TrafficSystemContract\obj\Release\TrafficSystemContract.dll
+E:\NewDev\TrafficProblem\TrafficSystemContract\obj\Release\TrafficSystemContract.pdb
