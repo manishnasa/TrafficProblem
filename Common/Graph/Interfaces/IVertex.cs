@@ -13,5 +13,6 @@ namespace Common.Graph.Interfaces
         double Weight { get; set; }
         double MinDistance { get; set; }
         IVertex previousVertex { get; set; }
+        double GetWeight(IVertex vertex);        
     }
 }

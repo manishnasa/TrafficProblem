@@ -7,7 +7,7 @@ namespace TrafficSystemContract
     public interface ISignal : IVertex
     {
         TimeSpan WaitTime { get; set; }
-        TimeSpan PassthroughTimePerCar { get; set; }
-        int NumberOfCarsWaiting { get; set; }
+        TimeSpan PassthroughTimePerCar { get; set; }        
+        Dictionary<IVertex, int> TrafficInformation { get; set; }
     }
 }

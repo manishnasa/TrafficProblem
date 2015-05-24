@@ -4,6 +4,7 @@ using TrafficSystemContract;
 using Common.Graph.Interfaces;
 using Common.Graph;
 using Common.Logger.Interfaces;
+using Common.Logger;
 using Wintellect.PowerCollections;
 
 namespace TrafficSystem
@@ -13,22 +14,90 @@ namespace TrafficSystem
         #region Properties
 
         Set<ISignal> Signals { get; set; }
-        Set<IStreet> Streets { get; set; }
 
         IShortestPathAlgorithm ShortestPathAlgorithm;
         ILogger Logger;
 
         #endregion
 
-        public TrafficControlRoom(IShortestPathAlgorithm shortestPathAlgorithm, ILogger logger)
+        #region Private
+
+        ISignal GetSignal(string name)
         {
-            if (shortestPathAlgorithm == null || logger == null)
+            ISignal findSignal = new Signal(name);
+            ISignal signal = null;
+            Signals.TryGetItem(findSignal, out signal);
+
+            return signal;
+        }
+
+        IList<ISignal> VertexListToSignalList(IList<IVertex> vertexPath)
+        {
+            if (vertexPath == null)
+            {
+                Logger.Error("Invalid vertexPath in VertexListToSignalList.");
+                return null;
+            }
+
+            IList<ISignal> signalPath = new List<ISignal>();
+            foreach (var vertex in vertexPath)
+            {
+                ISignal signal = GetSignal(vertex.Name);
+                if (signal == null)
+                {
+                    Logger.Error("Invalid data. Shortest path contains a signal: " + vertex.Name + " that does not exist.");
+                    return null;
+                }
+
+                signalPath.Add(signal);
+            }
+
+            return signalPath;
+        }
+
+        void UpdateSignalsWithTrafficInformation(Dictionary<string, Dictionary<string, int>> allSignalTraffic)
+        {            
+            foreach (var signalName in allSignalTraffic.Keys)
+            {
+                var signal = GetSignal(signalName);
+                if (signal == null)
+                {
+                    Logger.Error("Invalid signalName: + " + signalName + " in Input.");
+                    continue;
+                }
+
+                Dictionary<string, int> trafficInfoAtSignal;
+                allSignalTraffic.TryGetValue(signalName, out trafficInfoAtSignal);
+                Dictionary<IVertex, int> trafficInfoAtSignalWithSignalObject = new Dictionary<IVertex, int>();
+
+                foreach (var trafficInfoSignalName in trafficInfoAtSignal.Keys)
+                {
+                    var trafficInfoSignal = GetSignal(trafficInfoSignalName);
+                    if (trafficInfoSignal == null)
+                    {
+                        Logger.Error("Invalid signalName: + " + trafficInfoSignal + " in Input.");
+                        continue;
+                    }
+
+                    int traffic;
+                    trafficInfoAtSignal.TryGetValue(trafficInfoSignalName, out traffic);
+                    trafficInfoAtSignalWithSignalObject.Add(trafficInfoSignal, traffic);
+                }
+
+                signal.TrafficInformation = trafficInfoAtSignalWithSignalObject;
+            }
+        }
+
+        #endregion
+
+        public TrafficControlRoom(IShortestPathAlgorithm shortestPathAlgorithm)
+        {
+            if (shortestPathAlgorithm == null)
                 throw new ArgumentNullException("Null argument in TrafficControlRoom constructor");
 
             Signals = new Set<ISignal>();
-            Streets = new Set<IStreet>();
             ShortestPathAlgorithm = shortestPathAlgorithm;
-            Logger = logger;
+            Logger = DumbConsoleLogger.GetInstance();
         }
 
         public ISignal AddSignal(string name, int waitTimeInSeconds = 0, int passThroughTime = 0)
@@ -40,7 +109,7 @@ namespace TrafficSystem
             }
 
             ISignal signal = new Signal(name, waitTimeInSeconds, passThroughTime);            
-            if( !Signals.Add(signal) )
+            if( Signals.Add(signal) )
             {
                 Logger.Error("Oops, a Signal with name " + name + " already exists!");
                 return null;
@@ -80,7 +149,27 @@ namespace TrafficSystem
             return true;
         }
 
-        public IRoute GetFastestRoute(string startName, string destinationName, Dictionary<string, int> signalsWithTrafficCount)
+        //At a junction or signal, streets opposite each other will be called PairedStreets
+        //In our example - EX - XC and AX - XB will be pair streets
+        //This information is important because traffic would clear from both the pair streets in one green light round
+        public bool PairStreets(string point1Name, string junctionName, string point2Name)
+        {
+            ISignal point1 = GetSignal(point1Name);
+            ISignal junction = GetSignal(junctionName);
+            ISignal pointt2 = GetSignal(point2Name);
+
+            if( point1 == null || junction == null || point2 == null )
+            {
+                Logger.Error("One of the input signals doesnt exist. Invalid input to PairStreets!");
+                return false;
+            }
+
+            Tuple<ISignal, ISignal>
+
+            return true;            
+        }
+
+        public IRoute GetFastestRoute(string startName, string destinationName, Dictionary<string, Dictionary<string, int>> allSignalTraffic)
         {
             ISignal startSignal = GetSignal(startName);
             ISignal destinationSignal = GetSignal(destinationName);
@@ -90,64 +179,17 @@ namespace TrafficSystem
                 return null;
             }
 
-            //Update the traffic information on the signals
-            if (signalsWithTrafficCount != null )
-            {
-                foreach (var signalName in signalsWithTrafficCount.Keys)
-                {
-                    int num;
-                    if (!signalsWithTrafficCount.TryGetValue(signalName, out num))
-                    {
-                        //This should ideally never happen
-                        Logger.Error("Something is not right. Invalid data in signalsWithTrafficCount in TrafficControlRoom:GetFastestRoute");
-                        return null;
-                    }
-
-                    ISignal signal = GetSignal(signalName);
-                    if (signal == null)
-                    {
-                        Logger.Error("Bad data in signalsWithTrafficCount in TrafficControlRoom:GetFastestRoute. Signal " + signalName + " does not exist.");
-                        return null;
-                    }
-                    signal.NumberOfCarsWaiting = num;
-                }
-            }
+            UpdateSignalsWithTrafficInformation(allSignalTraffic);
             
             IList<IVertex> vertexPath = ShortestPathAlgorithm.GetShortestPath(startSignal, destinationSignal);
+            Logger.Info("The fastest path would be: ");
+            foreach( var vertex in vertexPath )
+            {
+                Logger.Info(vertex.Name);
+            }
+
             return new Route(VertexListToSignalList(vertexPath));
         }
-
-        ISignal GetSignal(string name)
-        {
-            ISignal findSignal = new Signal(name);
-            ISignal signal = null;
-            Signals.TryGetItem(findSignal, out signal);
-
-            return signal;
-        }
-
-        IList<ISignal> VertexListToSignalList(IList<IVertex> vertexPath)
-        {
-            if( vertexPath == null )
-            {
-                Logger.Error("Invalid vertexPath in VertexListToSignalList.");
-                return null;
-            }
-
-            IList<ISignal> signalPath = new List<ISignal>();
-            foreach(var vertex in vertexPath)
-            {
-                ISignal signal = GetSignal(vertex.Name);
-                if( signal == null )
-                {
-                    Logger.Error("Invalid data. Shortest path contains a signal: " + vertex.Name + " that does not exist.");
-                    return null;
-                }
-
-                signalPath.Add(signal);
-            }
-
-            return signalPath;
-        }
+        
     }
 }

@@ -5,7 +5,7 @@ using TrafficSystemContract;
 
 namespace TrafficSystem
 {
-    public class Street: Edge, IStreet
+    class Street: Edge, IStreet
     {
         public Street(ISignal startVertex, ISignal destinationVertex, double distanceInKm, double speedInKmph)
             : base(startVertex, destinationVertex)

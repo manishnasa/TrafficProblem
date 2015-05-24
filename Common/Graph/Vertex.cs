@@ -48,6 +48,13 @@ namespace Common.Graph
         public override int GetHashCode()
         {
             return Name.GetHashCode();
-        }        
+        }
+        
+        virtual public double GetWeight(IVertex startVertex)
+        {
+            //Default implementation. A child class could override to make use of startVertex 
+            //to determine the weight of this vertex.
+            return Weight;             
+        }
     }
 }

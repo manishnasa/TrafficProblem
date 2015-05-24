@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using Common.Graph.Interfaces;
+using Common.Logger.Interfaces;
+using Common.Logger;
 
 namespace Common.Graph
 {
     public class Dijkstra: IShortestPathAlgorithm
     {
+        ILogger Logger = DumbConsoleLogger.GetInstance();
+
         void PopulateShortestPathGraph(IVertex startVertex, IVertex destinationVertex)
         {
             startVertex.MinDistance = 0;
@@ -30,9 +34,10 @@ namespace Common.Graph
                     if(visitedVertices.Contains(v))
                         continue;
 
+                    Logger.Info("Evaluate edge from " + u.Name + " to " + v.Name);
                     double distanceThroughU = u.MinDistance + CalculateCostToVertex(edge);
                     if (distanceThroughU < v.MinDistance)
-                    {
+                    {                        
                         vertices.Remove(v);
                         v.MinDistance = distanceThroughU;
                         v.previousVertex = u;

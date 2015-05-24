@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+
 
 namespace TrafficSystemContract
 {
@@ -7,6 +9,6 @@ namespace TrafficSystemContract
         ISignal AddSignal(string name, int waitTimeInSeconds = 0, int passThroughTime = 0);
         IStreet AddStreet(string startName, string destinationName, double distanceInKm, double speedInKmph);
         bool AddDoubleStreet(string point1, string point2, double distanceInKm, double speedInKmph);
-        IRoute GetFastestRoute(string startName, string destinationName, Dictionary<string, int> signalsWithTrafficCount);
+        IRoute GetFastestRoute(string startName, string destinationName, Dictionary<string, Dictionary<string, int>> allSignalTraffic);
     }
 }

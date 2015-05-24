@@ -5,3 +5,10 @@ E:\NewDev\TrafficProblem\TrafficSystemContract\obj\Debug\TrafficSystemContract.d
 E:\NewDev\TrafficProblem\TrafficSystemContract\obj\Debug\TrafficSystemContract.pdb
 E:\NewDev\TrafficProblem\TrafficSystemContract\bin\Debug\Common.dll
 E:\NewDev\TrafficProblem\TrafficSystemContract\bin\Debug\Common.pdb
+C:\Users\ABC\Downloads\TrafficProblem-master\TrafficProblem-master\TrafficSystemContract\obj\Debug\TrafficSystemContract.csprojResolveAssemblyReference.cache
+C:\Users\ABC\Downloads\TrafficProblem-master\TrafficProblem-master\TrafficSystemContract\obj\Debug\TrafficSystemContract.dll
+C:\Users\ABC\Downloads\TrafficProblem-master\TrafficProblem-master\TrafficSystemContract\obj\Debug\TrafficSystemContract.pdb
+C:\Users\ABC\Downloads\TrafficProblem-master\TrafficProblem-master\TrafficSystemContract\bin\Debug\TrafficSystemContract.dll
+C:\Users\ABC\Downloads\TrafficProblem-master\TrafficProblem-master\TrafficSystemContract\bin\Debug\TrafficSystemContract.pdb
+C:\Users\ABC\Downloads\TrafficProblem-master\TrafficProblem-master\TrafficSystemContract\bin\Debug\Common.dll
+C:\Users\ABC\Downloads\TrafficProblem-master\TrafficProblem-master\TrafficSystemContract\bin\Debug\Common.pdb
