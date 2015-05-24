@@ -35,10 +35,9 @@ namespace Common.Graph
         }
 
         public override int GetHashCode()
-        {
-            //TODO This weekens the hash function. Sum as hash is probably a bad idea. Because 6 = 2 + 4, 1 + 5 .
-            //Need to come up with a better way to do it.
-            return (StartVertex.GetHashCode() + DestinationVertex.GetHashCode());
+        {            
+            string hashString = StartVertex.GetHashCode().ToString() + DestinationVertex.GetHashCode().ToString();
+            return hashString.GetHashCode();
         }
     }
 }
