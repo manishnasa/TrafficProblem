@@ -13,7 +13,7 @@ namespace TrafficSystem
     {
         #region Properties
 
-        Set<ISignal> Signals { get; set; }
+        public  Set<ISignal> Signals { get; set; }
 
         IShortestPathAlgorithm ShortestPathAlgorithm;
         ILogger Logger;
@@ -108,6 +108,12 @@ namespace TrafficSystem
                 return null;
             }
 
+            if(waitTimeInSeconds < 0 || passThroughTime < 0)
+            {
+                Logger.Error("Negative waitTime or passThroughTime.");
+                return null;
+            }
+
             ISignal signal = new Signal(name, waitTimeInSeconds, passThroughTime);            
             if( Signals.Add(signal) )
             {
@@ -123,6 +129,12 @@ namespace TrafficSystem
             if( distanceInKm < 0 || speedInKmph < 0 )
             {
                 Logger.Error("That was a negative distance or speed!");
+                return null;
+            }
+
+            if(startName == destinationName)
+            {
+                Logger.Error("Cannot make street from same point to same point!");
                 return null;
             }
 
@@ -156,7 +168,7 @@ namespace TrafficSystem
         {
             ISignal point1 = GetSignal(point1Name);
             ISignal junction = GetSignal(junctionName);
-            ISignal pointt2 = GetSignal(point2Name);
+            ISignal point2 = GetSignal(point2Name);
 
             if( point1 == null || junction == null || point2 == null )
             {
@@ -164,7 +176,8 @@ namespace TrafficSystem
                 return false;
             }
 
-            Tuple<ISignal, ISignal>
+            Tuple<ISignal, ISignal> streetPair = Tuple.Create<ISignal, ISignal>(point1, point2);
+            junction.StreetPairs.Add(streetPair);
 
             return true;            
         }
@@ -179,10 +192,11 @@ namespace TrafficSystem
                 return null;
             }
 
-            UpdateSignalsWithTrafficInformation(allSignalTraffic);
+            if (allSignalTraffic != null)
+                UpdateSignalsWithTrafficInformation(allSignalTraffic);
             
             IList<IVertex> vertexPath = ShortestPathAlgorithm.GetShortestPath(startSignal, destinationSignal);
-            Logger.Info("The fastest path would be: ");
+            Logger.Info("\n\nThe fastest path would be: ");
             foreach( var vertex in vertexPath )
             {
                 Logger.Info(vertex.Name);

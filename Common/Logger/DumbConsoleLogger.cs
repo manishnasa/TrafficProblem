@@ -18,7 +18,7 @@ namespace Common.Logger
 
         public void Info(string message)
         {
-            Console.WriteLine("INFO: " + message);
+            Console.WriteLine("" + message);
         }
 
         public void Error(string message)

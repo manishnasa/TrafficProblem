@@ -34,7 +34,7 @@ namespace Common.Graph
                     if(visitedVertices.Contains(v))
                         continue;
 
-                    Logger.Info("Evaluate edge from " + u.Name + " to " + v.Name);
+                    Logger.Info("\n\n*** Evaluate edge from " + u.Name + " to " + v.Name + " . ***");
                     double distanceThroughU = u.MinDistance + CalculateCostToVertex(edge);
                     if (distanceThroughU < v.MinDistance)
                     {                        

@@ -28,6 +28,9 @@ namespace SymantecCity
             controlRoom.AddDoubleStreet("C", "X", 0.5, speed);
             controlRoom.AddDoubleStreet("E", "X", 0.5, speed);
 
+            controlRoom.PairStreets("A", "X", "B");
+            controlRoom.PairStreets("E", "X", "C");
+
             Dictionary<string, int> trafficAtX = new Dictionary<string, int>()
             {
                 { "A", 3 },
@@ -40,6 +43,7 @@ namespace SymantecCity
             };
 
             IRoute route = controlRoom.GetFastestRoute("E", "B", signalTraffic);
+                    
             Console.ReadKey();
         }
     }

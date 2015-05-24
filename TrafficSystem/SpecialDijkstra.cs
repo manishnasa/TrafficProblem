@@ -27,11 +27,11 @@ namespace TrafficSystem
             var start = edge.StartVertex;
             var destination = edge.DestinationVertex;
 
-            Logger.Info("It will take " + edge.Weight + " seconds to cross this street.");
+            Logger.Info("It will take " + edge.Weight + " seconds to traverse this street.");
             
             var totalCost = edge.Weight + destination.GetWeight(start);
 
-            Logger.Info("Total time of travel for this street = " + totalCost + " seconds");
+            Logger.Info("\n+++ Total time of travel for this street = " + totalCost + " seconds. +++");
 
             return totalCost;            
         }

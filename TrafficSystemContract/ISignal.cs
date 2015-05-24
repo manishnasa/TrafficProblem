@@ -9,5 +9,6 @@ namespace TrafficSystemContract
         TimeSpan WaitTime { get; set; }
         TimeSpan PassthroughTimePerCar { get; set; }        
         Dictionary<IVertex, int> TrafficInformation { get; set; }
+        IList<Tuple<ISignal, ISignal>> StreetPairs { get; set; }
     }
 }
